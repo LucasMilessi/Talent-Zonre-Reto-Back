@@ -1,10 +1,7 @@
 package com.sofka.reto.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,15 +19,15 @@ public class Product {
     private String name;
 
     @Column(length = 25)
-    private int inInventory;
+    private Integer inInventory;
 
     @Column(length = 25)
     private boolean enable;
 
     @Column(length = 25)
-    private int min;
+    private Integer min = 8;
 
     @Column(length = 25, nullable = false)
-    private int max;
+    private Integer max = 200;
 
 }

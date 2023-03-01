@@ -33,12 +33,7 @@ public class BuyServiceImpl implements BuyService {
     @Override
     public Buy addBuy(String name, String idType, String clientName, List<RequestProduct> products){
 
-        Buy buy = Buy.builder()
-                .name(name)
-                .currentDate(LocalDateTime.now())
-                .idType(idType)
-                .clientName(clientName)
-                .build();
+        Buy buy = new Buy(name, idType, clientName);
 
         try {
             for(RequestProduct product : products){

@@ -23,14 +23,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ResponseEntity<Product> addProduct(String name, int quantity){
 
-        Product productResponse;
+        Product productResponse = new Product();
 
         try {
-            productResponse = Product.builder()
-                .name(name)
-                .enable(true)
-                .inInventory(quantity)
-                .build();
+            productResponse.setName(name);
+            productResponse.setInInventory(quantity);
 
         }catch (Exception e){
             throw new RuntimeException("Algo salio mal. "+e);
@@ -53,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         try {
 
             if(productUtil.validateNull(product)){
-                productResponse = productRepository.getReferenceById(product.getId());
+                productResponse = productRepository.getById(product.getId());
 
                 productResponse.setName(product.getName());
                 productResponse.setInInventory(product.getInInventory());

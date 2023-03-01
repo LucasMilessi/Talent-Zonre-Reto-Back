@@ -4,7 +4,7 @@ import com.sofka.reto.model.Product;
 
 public interface ProductUtil {
 
-    void calculateStock(int quantity, Long id);
+    void calculateStock(Integer quantity, Long id);
 
     boolean validateNull(Product product);
 }

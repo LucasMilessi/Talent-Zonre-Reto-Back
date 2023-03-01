@@ -2,7 +2,6 @@ package com.sofka.reto.controller;
 
 import com.sofka.reto.model.Product;
 import com.sofka.reto.service.ProductService;
-import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -38,17 +37,16 @@ public class ProductController {
                                   @RequestParam Integer quantity, @RequestParam boolean enable,
                                   @RequestParam Integer min, @RequestParam Integer max){
 
-        Product product;
+        Product product = new Product();
 
         try{
-        product = Product.builder()
-                .id(id)
-                .name(name)
-                .inInventory(quantity)
-                .enable(enable)
-                .min(min)
-                .max(max)
-                .build();
+
+            product.setId(id);
+            product.setName(name);
+            product.setInInventory(quantity);
+            product.setEnable(enable);
+            product.setMin(min);
+            product.setMax(max);
 
         }catch (Exception e){
             throw new RuntimeException("Algo salio mal. "+e);

@@ -1,33 +1,85 @@
 package com.sofka.reto.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import javax.persistence.*;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Data
 @Entity
 public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(length = 25)
+    @Column
     private String name;
 
-    @Column(length = 25)
+    @Column
     private Integer inInventory;
 
-    @Column(length = 25)
+    @Column
     private boolean enable;
 
-    @Column(length = 25)
-    private Integer min = 8;
+    @Column
+    private Integer min;
 
-    @Column(length = 25, nullable = false)
-    private Integer max = 200;
+    @Column
+    private Integer max;
 
+    public Product() {
+    }
+
+    public Product(String name, Integer inInventory) {
+        this.name = name;
+        this.inInventory = inInventory;
+        this.enable = true;
+        this.min = 8;
+        this.max = 200;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getInInventory() {
+        return inInventory;
+    }
+
+    public void setInInventory(Integer inInventory) {
+        this.inInventory = inInventory;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public Integer getMin() {
+        return min;
+    }
+
+    public void setMin(Integer min) {
+        this.min = min;
+    }
+
+    public Integer getMax() {
+        return max;
+    }
+
+    public void setMax(Integer max) {
+        this.max = max;
+    }
 }

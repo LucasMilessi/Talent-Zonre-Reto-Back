@@ -1,32 +1,76 @@
 package com.sofka.reto.model;
 
-import jakarta.persistence.*;
-import lombok.*;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Builder
-@Data
 @Entity
+@Table(name = "buyout")
 public class Buy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
-    private Long id;
+    private Long buyId;
 
-    @Column(length = 25, nullable = false)
+    @Column
     private String name;
 
-    @Column(length = 25, nullable = false)
+    @Column
     private LocalDateTime currentDate;
 
-    @Column(length = 25, nullable = false)
-    private String idType;
+    @Column
+    private String type;
 
-    @Column(length = 25, nullable = false)
+    @Column
     private String clientName;
 
+    public Buy() {
+    }
+
+    public Buy(String name, String type, String clientName) {
+        this.name = name;
+        this.currentDate = LocalDateTime.now();
+        this.type = type;
+        this.clientName = clientName;
+    }
+
+    public Long getBuyId() {
+        return buyId;
+    }
+
+    public void setBuyId(Long buyId) {
+        this.buyId = buyId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public LocalDateTime getCurrentDate() {
+        return currentDate;
+    }
+
+    public void setCurrentDate(LocalDateTime currentDate) {
+        this.currentDate = currentDate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getClientName() {
+        return clientName;
+    }
+
+    public void setClientName(String clientName) {
+        this.clientName = clientName;
+    }
 }

@@ -1,20 +1,21 @@
 package com.sofka.reto.util.impl;
 
-
 import com.sofka.reto.model.Product;
 import com.sofka.reto.repository.ProductRepository;
 import com.sofka.reto.util.ProductUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ProductUtilImpl implements ProductUtil {
 
     @Autowired
     private ProductRepository productRepository;
 
     @Override
-    public void calculateStock(int quantity, Long id) {
+    public void calculateStock(Integer quantity, Long id) {
 
-        Product product = productRepository.getReferenceById(id);
+        Product product = productRepository.getById(id);
 
         try {
             if (product.getMin() < quantity || product.getMax() > quantity) {

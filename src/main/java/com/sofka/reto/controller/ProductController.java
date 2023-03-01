@@ -16,10 +16,10 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping(path = "/add", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<Product> addProduct(@RequestBody String name, @RequestBody Integer quantity){
+    @PostMapping(path = "/add")
+    public ResponseEntity<Product> addProduct(@RequestBody Product product){
 
-        return productService.addProduct(name, quantity);
+        return productService.addProduct(product);
     }
 
     @GetMapping("/list")
@@ -29,25 +29,9 @@ public class ProductController {
     }
 
     @PutMapping(path = "/update/{id}")
-    public ResponseEntity<Product> productUpdate(@PathVariable("id") Long id, @RequestParam String name,
-                                  @RequestParam Integer quantity, @RequestParam boolean enable,
-                                  @RequestParam Integer min, @RequestParam Integer max){
+    public ResponseEntity<Product> productUpdate(@PathVariable("id") Long id, @RequestBody Product product){
 
-        Product product = new Product();
-
-        try{
-
-            product.setId(id);
-            product.setName(name);
-            product.setInInventory(quantity);
-            product.setEnable(enable);
-            product.setMin(min);
-            product.setMax(max);
-
-        }catch (Exception e){
-            throw new RuntimeException("Algo salio mal. "+e);
-        }
-        return productService.productUpdate(product);
+        return productService.productUpdate(id, product);
     }
 
     @DeleteMapping(path = "/delete/{id}")

@@ -28,12 +28,12 @@ public class Product {
     public Product() {
     }
 
-    public Product(String name, Integer inInventory) {
+    public Product(String name, Integer inInventory, boolean enable, Integer min, Integer max) {
         this.name = name;
         this.inInventory = inInventory;
-        this.enable = true;
-        this.min = 8;
-        this.max = 200;
+        this.enable = enable;
+        this.min = min;
+        this.max = max;
     }
 
     public Long getId() {

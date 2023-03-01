@@ -1,7 +1,7 @@
 package com.sofka.reto.service.impl;
 
 import com.sofka.reto.model.Shop;
-import com.sofka.reto.model.ProductList;
+import com.sofka.reto.model.ShopList;
 import com.sofka.reto.repository.ShopRepository;
 import com.sofka.reto.repository.ProductRepository;
 import com.sofka.reto.service.ShopService;
@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,21 +29,21 @@ public class ShopServiceImpl implements ShopService {
     private ProductUtil productUtil;
 
     @Override
-    public ResponseEntity<Shop> addBuy(String name, String idType, String clientName, List<ProductList> products){
+    public ResponseEntity<Shop> addBuy(Shop shopRequest){
 
         Shop shop = new Shop();
 
         try {
-            List<ProductList> productLists = new ArrayList<>();
-            shop.setName(name);
-            shop.setType(idType);
-            shop.setClientName(clientName);
+            List<ShopList> shopLists = new ArrayList<>();
+            shop.setClientName(shopRequest.getClientName());
+            shop.setType(shopRequest.getType());
+            shop.setDateTime(LocalDateTime.now());
 
-            for(ProductList product : products){
+            for(ShopList product : shopRequest.getProductList()){
                 productUtil.calculateStock(product.getQuantity(), product.getIdProduct());
-                productLists.add(product);
+                shopLists.add(product);
             }
-            shop.setProductList(productLists);
+            shop.setProductList(shopLists);
         }catch (RuntimeException e){
             throw new RuntimeException(e);
         }

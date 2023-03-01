@@ -1,22 +1,23 @@
 package com.sofka.reto.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class ProductList {
+public class ShopList {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     private Long idProduct;
 
     private Integer quantity;
 
-    public ProductList() {
+
+    public ShopList() {
     }
 
-    public ProductList(Long idProduct, Integer quantity) {
+    public ShopList(Long idProduct, Integer quantity) {
         this.idProduct = idProduct;
         this.quantity = quantity;
     }

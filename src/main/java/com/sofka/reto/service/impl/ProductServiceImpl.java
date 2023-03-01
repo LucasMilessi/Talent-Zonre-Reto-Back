@@ -20,14 +20,19 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductUtil productUtil;
 
+    private String MESSAGE = "El Producto se borro exitosamente.";
+
     @Override
-    public ResponseEntity<Product> addProduct(String name, int quantity){
+    public ResponseEntity<Product> addProduct(Product product){
 
         Product productResponse = new Product();
 
         try {
-            productResponse.setName(name);
-            productResponse.setInInventory(quantity);
+            productResponse.setName(product.getName());
+            productResponse.setInInventory(product.getInInventory());
+            productResponse.setEnable(product.isEnable());
+            productResponse.setMin(product.getMin());
+            productResponse.setMax(product.getMax());
 
         }catch (Exception e){
             throw new RuntimeException("Algo salio mal. "+e);
@@ -43,14 +48,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ResponseEntity<Product> productUpdate(Product product){
+    public ResponseEntity<Product> productUpdate(Long id, Product product){
 
         Product productResponse = new Product();
 
         try {
 
             if(productUtil.validateNull(product)){
-                productResponse = productRepository.getById(product.getId());
+                productResponse = productRepository.getById(id);
 
                 productResponse.setName(product.getName());
                 productResponse.setInInventory(product.getInInventory());
@@ -72,7 +77,7 @@ public class ProductServiceImpl implements ProductService {
         try {
             productRepository.deleteById(id);
 
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(MESSAGE,HttpStatus.ACCEPTED);
 
         }catch (Exception e){
             return new ResponseEntity<>("No se pudo borrar. "+e, HttpStatus.EXPECTATION_FAILED);

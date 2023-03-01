@@ -14,9 +14,6 @@ public class Shop {
     private Long buyId;
 
     @Column
-    private String name;
-
-    @Column
     private LocalDateTime dateTime;
 
     @Column
@@ -26,18 +23,17 @@ public class Shop {
     private String clientName;
 
     @Column
-    @ElementCollection(targetClass=ProductList.class)
-    private List<ProductList> productList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "buyId")
+    private List<ShopList> shopList;
 
     public Shop() {
     }
 
-    public Shop(String name, String type, String clientName, List<ProductList> productList) {
-        this.name = name;
-        this.dateTime = LocalDateTime.now();
+    public Shop(String type, String clientName, List<ShopList> shopList) {
         this.type = type;
         this.clientName = clientName;
-        this.productList = productList;
+        this.shopList = shopList;
     }
 
     public Long getBuyId() {
@@ -46,14 +42,6 @@ public class Shop {
 
     public void setBuyId(Long buyId) {
         this.buyId = buyId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public LocalDateTime getDateTime() {
@@ -80,11 +68,11 @@ public class Shop {
         this.clientName = clientName;
     }
 
-    public List<ProductList> getProductList() {
-        return productList;
+    public List<ShopList> getProductList(){
+        return shopList;
     }
 
-    public void setProductList(List<ProductList> productList) {
-        this.productList = productList;
+    public void setProductList(List<ShopList> shopList) {
+        this.shopList = shopList;
     }
 }

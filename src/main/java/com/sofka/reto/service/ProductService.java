@@ -6,11 +6,11 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface ProductService {
-    ResponseEntity<Product> addProduct(String name, int quantity);
+    ResponseEntity<Product> addProduct(Product product);
 
     ResponseEntity<List<Product>> productList();
 
-    ResponseEntity<Product> productUpdate(Product product);
+    ResponseEntity<Product> productUpdate(Long id, Product product);
 
     ResponseEntity<String> productDelete(Long id);
 }

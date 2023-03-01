@@ -18,22 +18,22 @@ public class ProductUtilImpl implements ProductUtil {
         Product product = productRepository.getById(id);
 
         try {
-            if ((product.getMin() < quantity || product.getMax() > quantity) && (product.getInInventory() > quantity)) {
-                product.setInInventory(quantity - product.getInInventory());
+            if ((product.getMin() < quantity && product.getMax() > quantity) && (product.getInInventory() > quantity)) {
+                product.setInInventory(product.getInInventory() - quantity);
                 productRepository.save(product);
+            }else{
+                throw new Exception("LA CANTIDAD A INGRESAR NO SE ADMITE.");
             }
         } catch (Exception e) {
-            throw new IllegalArgumentException("LA CANTIDAD A INGRESAR NO SE ADMITE. "+ e);
+            throw new IllegalArgumentException(e);
         }
     }
 
     @Override
     public boolean validateNull(Product product){
 
-        Boolean enable = product.isEnable();
-
-        if((product.getId() == null) || product.getName().isEmpty() || (product.getInInventory() == null)
-                || (enable == null) || (product.getMin() == null) || (product.getMax() == null)){
+        if(product.getName().isEmpty() || (product.getInInventory() == null)
+                || (product.getMin() == null) || (product.getMax() == null)){
             throw new RuntimeException("Hay campos vacios. Por favos intente nuevamente.");
         }
 

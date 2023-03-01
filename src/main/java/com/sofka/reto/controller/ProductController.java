@@ -3,6 +3,7 @@ package com.sofka.reto.controller;
 import com.sofka.reto.model.Product;
 import com.sofka.reto.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,13 +16,8 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping
-    public String message(){
-        return "Hola";
-    }
-
-    @PostMapping("/add")
-    public ResponseEntity<Product> addProduct(@RequestParam String name, @RequestParam int quantity){
+    @PostMapping(path = "/add", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<Product> addProduct(@RequestBody String name, @RequestBody Integer quantity){
 
         return productService.addProduct(name, quantity);
     }

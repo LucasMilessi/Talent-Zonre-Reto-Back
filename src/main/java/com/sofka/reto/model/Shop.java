@@ -3,6 +3,7 @@ package com.sofka.reto.model;
 import javax.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table
@@ -24,14 +25,19 @@ public class Shop {
     @Column
     private String clientName;
 
+    @Column
+    @ElementCollection(targetClass=ProductList.class)
+    private List<ProductList> productList;
+
     public Shop() {
     }
 
-    public Shop(String name, String type, String clientName) {
+    public Shop(String name, String type, String clientName, List<ProductList> productList) {
         this.name = name;
         this.dateTime = LocalDateTime.now();
         this.type = type;
         this.clientName = clientName;
+        this.productList = productList;
     }
 
     public Long getBuyId() {
@@ -72,5 +78,13 @@ public class Shop {
 
     public void setClientName(String clientName) {
         this.clientName = clientName;
+    }
+
+    public List<ProductList> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<ProductList> productList) {
+        this.productList = productList;
     }
 }

@@ -18,7 +18,7 @@ public class ProductUtilImpl implements ProductUtil {
         Product product = productRepository.getById(id);
 
         try {
-            if (product.getMin() < quantity || product.getMax() > quantity) {
+            if ((product.getMin() < quantity || product.getMax() > quantity) && (product.getInInventory() > quantity)) {
                 product.setInInventory(quantity - product.getInInventory());
                 productRepository.save(product);
             }

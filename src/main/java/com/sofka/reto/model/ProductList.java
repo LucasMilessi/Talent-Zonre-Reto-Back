@@ -1,17 +1,32 @@
 package com.sofka.reto.model;
 
-public class RequestProduct {
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
+public class ProductList {
+
+    @Id
+    private Long id;
 
     private Long idProduct;
 
     private Integer quantity;
 
-    public RequestProduct() {
+    public ProductList() {
     }
 
-    public RequestProduct(Long idProduct, Integer quantity) {
+    public ProductList(Long idProduct, Integer quantity) {
         this.idProduct = idProduct;
         this.quantity = quantity;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Long getIdProduct() {

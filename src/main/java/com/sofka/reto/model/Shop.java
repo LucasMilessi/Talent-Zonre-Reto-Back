@@ -5,8 +5,8 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "buyout")
-public class Buy {
+@Table
+public class Shop {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -16,7 +16,7 @@ public class Buy {
     private String name;
 
     @Column
-    private LocalDateTime currentDate;
+    private LocalDateTime dateTime;
 
     @Column
     private String type;
@@ -24,12 +24,12 @@ public class Buy {
     @Column
     private String clientName;
 
-    public Buy() {
+    public Shop() {
     }
 
-    public Buy(String name, String type, String clientName) {
+    public Shop(String name, String type, String clientName) {
         this.name = name;
-        this.currentDate = LocalDateTime.now();
+        this.dateTime = LocalDateTime.now();
         this.type = type;
         this.clientName = clientName;
     }
@@ -50,12 +50,12 @@ public class Buy {
         this.name = name;
     }
 
-    public LocalDateTime getCurrentDate() {
-        return currentDate;
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setCurrentDate(LocalDateTime currentDate) {
-        this.currentDate = currentDate;
+    public void setDateTime(LocalDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     public String getType() {

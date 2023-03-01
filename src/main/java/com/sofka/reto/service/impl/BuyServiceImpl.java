@@ -1,6 +1,6 @@
 package com.sofka.reto.service.impl;
 
-import com.sofka.reto.model.Buy;
+import com.sofka.reto.model.Shop;
 import com.sofka.reto.model.RequestProduct;
 import com.sofka.reto.repository.BuyRepository;
 import com.sofka.reto.repository.ProductRepository;
@@ -9,7 +9,6 @@ import com.sofka.reto.util.ProductUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -26,14 +25,14 @@ public class BuyServiceImpl implements BuyService {
     private ProductUtil productUtil;
 
     @Override
-    public List<Buy> getBuy(){
+    public List<Shop> getBuy(){
         return buyRepository.findAll();
     }
 
     @Override
-    public Buy addBuy(String name, String idType, String clientName, List<RequestProduct> products){
+    public Shop addBuy(String name, String idType, String clientName, List<RequestProduct> products){
 
-        Buy buy = new Buy(name, idType, clientName);
+        Shop shop = new Shop(name, idType, clientName);
 
         try {
             for(RequestProduct product : products){
@@ -43,7 +42,7 @@ public class BuyServiceImpl implements BuyService {
             throw new RuntimeException(e);
         }
 
-        return buyRepository.save(buy);
+        return buyRepository.save(shop);
     }
 
 }

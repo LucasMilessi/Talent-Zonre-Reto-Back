@@ -1,13 +1,13 @@
 package com.sofka.reto.service;
 
-import com.sofka.reto.model.Buy;
+import com.sofka.reto.model.Shop;
 import com.sofka.reto.model.RequestProduct;
 
 import java.util.List;
 
 public interface BuyService {
 
-    List<Buy> getBuy();
+    List<Shop> getBuy();
 
-    Buy addBuy(String name, String idType, String clientName, List<RequestProduct> products);
+    Shop addBuy(String name, String idType, String clientName, List<RequestProduct> products);
 }

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -45,6 +46,12 @@ public class ProductServiceImpl implements ProductService {
     public ResponseEntity<List<Product>> productList(){
 
         return new ResponseEntity<>(productRepository.findAll(), HttpStatus.OK);
+    }
+
+    @Override
+    public Optional<Product> productById(Long id){
+
+        return productRepository.findById(id);
     }
 
     @Override

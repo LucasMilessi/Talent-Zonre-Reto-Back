@@ -3,11 +3,11 @@ package com.sofka.reto.controller;
 import com.sofka.reto.model.Product;
 import com.sofka.reto.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -27,6 +27,12 @@ public class ProductController {
     public ResponseEntity<List<Product>> productList(){
 
         return productService.productList();
+    }
+
+    @GetMapping("/get/{id}")
+    public Optional<Product> productById(@PathVariable("id") Long id){
+
+        return productService.productById(id);
     }
 
     @PutMapping(path = "/update/{id}")
